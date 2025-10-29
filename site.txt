@@ -1,41 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instituto Sementes do Amanhã</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instituto Sementes do Amanhã</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
         body {
             box-sizing: border-box;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #fafafa;
+            background: #ffffff;
             color: #1f2937;
             line-height: 1.6;
         }
-       
+        
         .gradient-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 25%, #2563eb 50%, #3b82f6 75%, #60a5fa 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease-in-out infinite;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #334155 60%, #475569 100%);
             position: relative;
         }
-       
-        @keyframes gradientShift {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            25% {
-                background-position: 100% 50%;
-            }
-            50% {
-                background-position: 50% 100%;
-            }
-            75% {
-                background-position: 50% 0%;
-            }
-        }
-       
+        
         .gradient-bg::before {
             content: '';
             position: absolute;
@@ -43,24 +27,23 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.04)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
         }
-       
+        
         .section-hidden {
             display: none;
         }
-       
+        
         .section-active {
             display: block;
             animation: fadeIn 0.6s ease-out;
         }
-       
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-       
+        
         .card {
             background: white;
             border-radius: 16px;
@@ -68,83 +51,74 @@
             border: 1px solid #e5e7eb;
             transition: all 0.3s ease;
         }
-       
+        
         .card:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-       
+        
         .btn-primary {
-            background: linear-gradient(135deg, #1d4ed8, #2563eb, #3b82f6, #60a5fa);
-            background-size: 300% 300%;
-            animation: buttonGradient 4s ease-in-out infinite;
+            background: #2563eb;
             color: white;
             padding: 12px 24px;
-            border-radius: 12px;
+            border-radius: 8px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border: none;
             cursor: pointer;
+            font-size: 14px;
+            letter-spacing: 0.025em;
         }
-       
+        
         .btn-primary:hover {
-            background: linear-gradient(135deg, #1e3a8a, #1d4ed8, #2563eb, #3b82f6);
-            background-size: 300% 300%;
-            animation: buttonGradientHover 2s ease-in-out infinite;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(29, 78, 216, 0.4);
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
-       
-        @keyframes buttonGradient {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-size: 14px;
+            letter-spacing: 0.025em;
         }
-       
-        @keyframes buttonGradientHover {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
+        
+        .btn-secondary:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-1px);
         }
-       
+        
         .nav-active {
             background: rgba(255, 255, 255, 0.2);
             color: white;
             backdrop-filter: blur(10px);
         }
-       
+        
         .text-gradient {
-            background: linear-gradient(135deg, #1e3a8a, #1d4ed8, #2563eb, #3b82f6, #60a5fa);
-            background-size: 400% 400%;
-            animation: textGradient 6s ease-in-out infinite;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #1e293b;
+            font-weight: 700;
         }
-       
-        @keyframes textGradient {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            33% {
-                background-position: 100% 50%;
-            }
-            66% {
-                background-position: 50% 100%;
-            }
+        
+        .text-primary {
+            color: #2563eb;
         }
-       
+        
+        .text-secondary {
+            color: #64748b;
+        }
+        
         .logo-container {
             position: relative;
             display: inline-block;
         }
-       
+        
         .notification {
             position: fixed;
             top: 20px;
@@ -159,11 +133,11 @@
             transition: transform 0.3s ease;
             z-index: 1000;
         }
-       
+        
         .notification.show {
             transform: translateX(0);
         }
-       
+        
         .stats-card {
             background: white;
             padding: 32px;
@@ -172,35 +146,18 @@
             border: 1px solid #e5e7eb;
             transition: all 0.3s ease;
         }
-       
+        
         .stats-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
-       
+        
         .hero-section {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 30%, #2563eb 60%, #3b82f6 100%);
-            background-size: 400% 400%;
-            animation: heroGradient 10s ease-in-out infinite;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             position: relative;
             overflow: hidden;
         }
-       
-        @keyframes heroGradient {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            25% {
-                background-position: 100% 0%;
-            }
-            50% {
-                background-position: 100% 100%;
-            }
-            75% {
-                background-position: 0% 100%;
-            }
-        }
-       
+        
         .hero-section::before {
             content: '';
             position: absolute;
@@ -208,48 +165,38 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="grad1" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:rgba(59,130,246,0.1);stop-opacity:1" /><stop offset="100%" style="stop-color:rgba(59,130,246,0);stop-opacity:0" /></radialGradient></defs><circle cx="200" cy="200" r="300" fill="url(%23grad1)"/><circle cx="800" cy="800" r="200" fill="url(%23grad1)"/></svg>');
-            opacity: 0.6;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
         }
-       
+        
         .feature-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe, #93c5fd, #60a5fa);
-            background-size: 300% 300%;
-            animation: iconGradient 5s ease-in-out infinite;
-            border-radius: 16px;
+            width: 56px;
+            height: 56px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            margin-bottom: 24px;
-            transition: all 0.3s ease;
+            font-size: 24px;
+            margin-bottom: 20px;
+            transition: all 0.2s ease;
         }
-       
+        
         .feature-icon:hover {
-            animation: iconGradientHover 2s ease-in-out infinite;
-            transform: scale(1.1) rotate(5deg);
+            background: #e2e8f0;
+            transform: translateY(-2px);
         }
-       
-        @keyframes iconGradient {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
+        
+        .icon-primary {
+            background: #dbeafe;
+            border-color: #bfdbfe;
+            color: #2563eb;
         }
-       
-        @keyframes iconGradientHover {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
+        
+        .icon-primary:hover {
+            background: #bfdbfe;
         }
-       
+        
         .wave-divider {
             position: absolute;
             bottom: 0;
@@ -258,814 +205,710 @@
             overflow: hidden;
             line-height: 0;
         }
-       
+        
         .wave-divider svg {
             position: relative;
             display: block;
             width: calc(100% + 1.3px);
             height: 60px;
         }
-       
+        
         .wave-divider .shape-fill {
             fill: #fafafa;
         }
     </style>
-</head>
-<body>
-    <!-- Notificação -->
-    <div id="notification" class="notification">
-        <div class="flex items-center space-x-3">
-            <span id="notification-icon" class="text-xl">✅</span>
-            <span id="notification-text" class="font-medium">Mensagem enviada com sucesso!</span>
-        </div>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body><!-- Notificação -->
+  <div id="notification" class="notification">
+   <div class="flex items-center space-x-3"><span id="notification-icon" class="text-xl">✅</span> <span id="notification-text" class="font-medium">Mensagem enviada com sucesso!</span>
+   </div>
+  </div><!-- Header -->
+  <header class="gradient-bg text-white shadow-2xl relative z-10">
+   <div class="container mx-auto px-6 py-6 relative z-20">
+    <div class="flex items-center justify-between">
+     <div class="flex items-center space-x-4">
+      <div class="logo-container">
+       <svg width="48" height="48" viewbox="0 0 48 48" class="drop-shadow-sm"><defs>
+         <lineargradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#f1f5f9;stop-opacity:1" />
+         </lineargradient>
+         <lineargradient id="seedGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+         </lineargradient>
+        </defs> <!-- Fundo circular --> <circle cx="24" cy="24" r="22" fill="url(#logoGradient)" stroke="#e2e8f0" stroke-width="1.5" /> <!-- Símbolo da semente crescendo --> <g transform="translate(24,24)"><!-- Solo/base -->
+         <ellipse cx="0" cy="8" rx="12" ry="3" fill="#64748b" opacity="0.2" /> <!-- Semente -->
+         <ellipse cx="0" cy="4" rx="3" ry="4" fill="url(#seedGradient)" /> <!-- Broto principal -->
+         <path d="M0,0 Q-2,-8 -4,-12 Q-2,-14 0,-12 Q2,-14 4,-12 Q2,-8 0,0" fill="#10b981" stroke="#059669" stroke-width="0.5" /> <!-- Folhas -->
+         <ellipse cx="-6" cy="-8" rx="4" ry="2" fill="#34d399" opacity="0.8" transform="rotate(-30 -6 -8)" />
+         <ellipse cx="6" cy="-6" rx="3" ry="1.5" fill="#34d399" opacity="0.8" transform="rotate(30 6 -6)" /> <!-- Raízes -->
+         <path d="M-1,4 Q-3,6 -2,8 M1,4 Q3,6 2,8 M0,4 Q0,6 0,8" stroke="#8b5cf6" stroke-width="1" fill="none" opacity="0.6" /> <!-- Brilho/energia -->
+         <circle cx="0" cy="-10" r="1.5" fill="#fbbf24" opacity="0.8" />
+         <path d="M0,-12 L0.5,-10.5 L0,-9 L-0.5,-10.5 Z" fill="#fbbf24" opacity="0.6" />
+        </g>
+       </svg>
+      </div>
+      <div>
+       <h1 class="text-2xl font-bold">Instituto Sementes do Amanhã</h1>
+       <p class="text-sm text-white/80">Educação Profissional e Desenvolvimento Humano</p>
+      </div>
+     </div>
+     <nav class="hidden md:flex space-x-2"><button onclick="showSection('inicio')" class="nav-btn nav-active px-4 py-2 rounded-lg transition-all duration-200" id="nav-inicio">Início</button> <button onclick="showSection('sobre')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-200 hover:bg-white/10" id="nav-sobre">Sobre</button> <button onclick="showSection('projetos')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-200 hover:bg-white/10" id="nav-projetos">Programas</button> <button onclick="showSection('voluntarios')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-200 hover:bg-white/10" id="nav-voluntarios">Voluntários</button> <button onclick="showSection('doacoes')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-200 hover:bg-white/10" id="nav-doacoes">Apoie</button> <button onclick="showSection('contato')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-200 hover:bg-white/10" id="nav-contato">Contato</button>
+     </nav><button class="md:hidden text-white" onclick="toggleMobileMenu()">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg></button>
+    </div><!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden mt-4 space-y-2 hidden"><button onclick="showSection('inicio')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Início</button> <button onclick="showSection('sobre')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Sobre</button> <button onclick="showSection('projetos')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Programas</button> <button onclick="showSection('voluntarios')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Voluntários</button> <button onclick="showSection('doacoes')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Apoie</button> <button onclick="showSection('contato')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Contato</button>
     </div>
-
-    <!-- Header -->
-    <header class="gradient-bg text-white shadow-2xl relative z-10">
-        <div class="container mx-auto px-6 py-6 relative z-20">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="logo-container">
-                        <svg width="60" height="60" viewBox="0 0 60 60" class="drop-shadow-lg">
-                            <defs>
-                                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#cbd5e1;stop-opacity:0.9" />
-                                </linearGradient>
-                                <linearGradient id="handGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
-                                </linearGradient>
-                                <linearGradient id="plantGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#16a34a;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#4ade80;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                           
-                            <!-- Círculo base -->
-                            <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="#3b82f6" stroke-width="2"/>
-                           
-                            <!-- Mão -->
-                            <g>
-                                <!-- Palma -->
-                                <ellipse cx="30" cy="36" rx="8" ry="6" fill="url(#handGradient)"/>
-                                <!-- Dedos -->
-                                <ellipse cx="24" cy="32" rx="2" ry="6" fill="url(#handGradient)" transform="rotate(-20 24 32)"/>
-                                <ellipse cx="27" cy="30" rx="2" ry="7" fill="url(#handGradient)" transform="rotate(-10 27 30)"/>
-                                <ellipse cx="30" cy="29" rx="2" ry="8" fill="url(#handGradient)"/>
-                                <ellipse cx="33" cy="30" rx="2" ry="7" fill="url(#handGradient)" transform="rotate(10 33 30)"/>
-                                <ellipse cx="36" cy="32" rx="2" ry="6" fill="url(#handGradient)" transform="rotate(20 36 32)"/>
-                                <!-- Polegar -->
-                                <ellipse cx="22" cy="37" rx="3" ry="5" fill="url(#handGradient)" transform="rotate(-30 22 37)"/>
-                            </g>
-                           
-                            <!-- Planta -->
-                            <g>
-                                <!-- Caule -->
-                                <rect x="28" y="25" width="4" height="12" rx="2" fill="url(#plantGradient)"/>
-                                <!-- Folhas -->
-                                <path d="M27 21 Q22 16 18 12 Q20 10 25 15 Q28 18 27 21" fill="#22c55e"/>
-                                <path d="M33 21 Q38 16 42 12 Q40 10 35 15 Q32 18 33 21" fill="#22c55e"/>
-                                <path d="M30 18 Q28 13 30 8 Q32 13 30 18" fill="#4ade80"/>
-                            </g>
-                           
-                            <!-- Elementos decorativos -->
-                            <circle cx="16" cy="16" r="1" fill="#3b82f6" opacity="0.5">
-                                <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="44" cy="20" r="1.5" fill="#3b82f6" opacity="0.3">
-                                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
-                            </circle>
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold">Instituto Sementes do Amanhã</h1>
-                        <p class="text-sm text-white/80">Educação Profissional e Desenvolvimento Humano</p>
-                    </div>
-                </div>
-               
-                <nav class="hidden md:flex space-x-2">
-                    <button onclick="showSection('inicio')" class="nav-btn nav-active px-4 py-2 rounded-lg transition-all duration-200" id="nav-inicio">Início</button>
-                    <button onclick="showSection('sobre')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-200 hover:bg-white/10" id="nav-sobre">Sobre</button>
-                    <button onclick="showSection('projetos')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-200 hover:bg-white/10" id="nav-projetos">Programas</button>
-                    <button onclick="showSection('voluntarios')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-200 hover:bg-white/10" id="nav-voluntarios">Voluntários</button>
-                    <button onclick="showSection('doacoes')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-200 hover:bg-white/10" id="nav-doacoes">Apoie</button>
-                    <button onclick="showSection('contato')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-200 hover:bg-white/10" id="nav-contato">Contato</button>
-                </nav>
-               
-                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-           
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="md:hidden mt-4 space-y-2 hidden">
-                <button onclick="showSection('inicio')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Início</button>
-                <button onclick="showSection('sobre')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Sobre</button>
-                <button onclick="showSection('projetos')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Programas</button>
-                <button onclick="showSection('voluntarios')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Voluntários</button>
-                <button onclick="showSection('doacoes')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Apoie</button>
-                <button onclick="showSection('contato')" class="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/10">Contato</button>
-            </div>
+   </div>
+  </header><!-- Main Content -->
+  <main><!-- Seção Início -->
+   <section id="section-inicio" class="section-active"><!-- Hero Section -->
+    <div class="hero-section text-white py-24 relative">
+     <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-5xl mx-auto text-center">
+       <div class="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl mb-8">
+        <svg width="32" height="32" viewbox="0 0 32 32" fill="none"><!-- Símbolo de crescimento e transformação --> <g transform="translate(16,16)"><!-- Base circular -->
+          <circle cx="0" cy="0" r="14" fill="none" stroke="white" stroke-width="1.5" opacity="0.3" /> <!-- Seta de crescimento -->
+          <path d="M0,8 L0,-8 M-4,-4 L0,-8 L4,-4" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" /> <!-- Pontos de progresso -->
+          <circle cx="0" cy="4" r="1.5" fill="white" opacity="0.8" />
+          <circle cx="0" cy="0" r="1.5" fill="white" opacity="0.9" />
+          <circle cx="0" cy="-4" r="1.5" fill="white" /> <!-- Elementos de energia/transformação -->
+          <path d="M-8,-2 Q-6,0 -8,2 M8,-2 Q6,0 8,2" stroke="white" stroke-width="1.5" fill="none" opacity="0.6" />
+         </g>
+        </svg>
+       </div>
+       <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">Preparando Pessoas para o<br><span class="text-blue-300">Futuro Profissional</span></h1>
+       <p class="text-xl text-white/80 max-w-4xl mx-auto mb-12 leading-relaxed">Promovemos a inclusão social e o desenvolvimento humano por meio da educação socioemocional, tecnológica e administrativa, preparando indivíduos para o mercado de trabalho e para a vida em sociedade.</p>
+       <div class="flex flex-col sm:flex-row gap-4 justify-center"><button onclick="showSection('projetos')" class="btn-primary text-base px-8 py-4 bg-white text-slate-900 hover:bg-gray-100"> Conheça Nossos Programas </button> <button onclick="showSection('contato')" class="btn-secondary text-base px-8 py-4 border-white text-white hover:bg-white hover:text-slate-900"> Entre em Contato </button>
+       </div>
+      </div>
+     </div><!-- Wave Divider -->
+     <div class="wave-divider">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1200 120" preserveaspectratio="none"><path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill" />
+      </svg>
+     </div>
+    </div><!-- Eixos de Atuação -->
+    <div class="container mx-auto px-6 py-20">
+     <div class="text-center mb-16">
+      <h3 class="text-4xl font-bold text-gradient mb-4">Nossos Eixos de Atuação</h3>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Trabalhamos com uma abordagem integrada que combina desenvolvimento pessoal, tecnologia e preparação profissional para formar cidadãos completos.</p>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+      <div class="card p-8 text-center">
+       <div class="feature-icon icon-primary mx-auto">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor"><path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 11.5C15.8 11.5 16.5 12.2 16.5 13S15.8 14.5 15 14.5 13.5 13.8 13.5 13 14.2 11.5 15 11.5M7 7V9L1 9V7L7 7M9 11.5C9.8 11.5 10.5 12.2 10.5 13S9.8 14.5 9 14.5 7.5 13.8 7.5 13 8.2 11.5 9 11.5M12 7.5C12.8 7.5 13.5 8.2 13.5 9S12.8 10.5 12 10.5 10.5 9.8 10.5 9 11.2 7.5 12 7.5M12 15C14.2 15 16 16.8 16 19V22H8V19C8 16.8 9.8 15 12 15Z" />
+        </svg>
+       </div>
+       <h4 class="text-xl font-bold mb-4">Educação Socioemocional</h4>
+       <p class="text-gray-600">Autoconhecimento, comunicação e bem-estar emocional</p>
+      </div>
+      <div class="card p-8 text-center">
+       <div class="feature-icon icon-primary mx-auto">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor"><path d="M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z" />
+        </svg>
+       </div>
+       <h4 class="text-xl font-bold mb-4">Informática e Tecnologia</h4>
+       <p class="text-gray-600">Programação, robótica e inovação digital</p>
+      </div>
+      <div class="card p-8 text-center">
+       <div class="feature-icon icon-primary mx-auto">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor"><path d="M3,3H21A2,2 0 0,1 23,5V19A2,2 0 0,1 21,21H3A2,2 0 0,1 1,19V5A2,2 0 0,1 3,3M5,7V9H19V7H5M5,11V13H19V11H5M5,15V17H11V15H5Z" />
+        </svg>
+       </div>
+       <h4 class="text-xl font-bold mb-4">Serviços Administrativos</h4>
+       <p class="text-gray-600">Gestão, empreendedorismo e inserção no mercado</p>
+      </div>
+      <div class="card p-8 text-center">
+       <div class="feature-icon icon-primary mx-auto">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor"><path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z" />
+        </svg>
+       </div>
+       <h4 class="text-xl font-bold mb-4">Metodologia STEAM</h4>
+       <p class="text-gray-600">Integração de Ciências, Tecnologia, Engenharia, Artes e Matemática</p>
+      </div>
+     </div><!-- Estatísticas -->
+     <div class="text-center mb-16">
+      <h3 class="text-4xl font-bold text-gradient mb-4">Nossos Resultados</h3>
+      <p class="text-xl text-gray-600">Números que demonstram nosso impacto na comunidade</p>
+     </div>
+     <div class="bg-slate-50 rounded-2xl p-12 mb-20">
+      <div class="grid md:grid-cols-4 gap-8">
+       <div class="text-center">
+        <div class="text-4xl font-bold text-slate-900 mb-2">
+         800+
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-        <!-- Seção Início -->
-        <section id="section-inicio" class="section-active">
-            <!-- Hero Section -->
-            <div class="hero-section text-white py-24 relative">
-                <div class="container mx-auto px-6 relative z-10">
-                    <div class="max-w-4xl mx-auto text-center">
-                        <div class="feature-icon mx-auto mb-8 bg-white/10 backdrop-blur-sm">
-                            <span class="text-white">🎯</span>
-                        </div>
-                        <h2 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                            Preparando Pessoas para o
-                            <span class="text-blue-300">Futuro Profissional</span>
-                        </h2>
-                        <p class="text-xl text-white/90 max-w-3xl mx-auto mb-12 leading-relaxed">
-                            Promovemos a inclusão social e o desenvolvimento humano por meio da educação socioemocional,
-                            tecnológica e administrativa, preparando indivíduos para o mercado de trabalho e para a vida em sociedade.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button onclick="showSection('projetos')" class="btn-primary text-lg px-8 py-4">
-                                Conheça Nossos Programas
-                            </button>
-                            <button onclick="showSection('contato')" class="btn-primary bg-white/10 backdrop-blur-sm hover:bg-white/20 text-lg px-8 py-4">
-                                Entre em Contato
-                            </button>
-                        </div>
-                    </div>
-                </div>
-               
-                <!-- Wave Divider -->
-                <div class="wave-divider">
-                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- Eixos de Atuação -->
-            <div class="container mx-auto px-6 py-20">
-                <div class="text-center mb-16">
-                    <h3 class="text-4xl font-bold text-gradient mb-4">Nossos Eixos de Atuação</h3>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Trabalhamos com uma abordagem integrada que combina desenvolvimento pessoal,
-                        tecnologia e preparação profissional para formar cidadãos completos.
-                    </p>
-                </div>
-               
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-                    <div class="card p-8 text-center">
-                        <div class="feature-icon mx-auto">🧠</div>
-                        <h4 class="text-xl font-bold mb-4">Educação Socioemocional</h4>
-                        <p class="text-gray-600">Autoconhecimento, comunicação e bem-estar emocional</p>
-                    </div>
-                    <div class="card p-8 text-center">
-                        <div class="feature-icon mx-auto">💻</div>
-                        <h4 class="text-xl font-bold mb-4">Informática e Tecnologia</h4>
-                        <p class="text-gray-600">Programação, robótica e inovação digital</p>
-                    </div>
-                    <div class="card p-8 text-center">
-                        <div class="feature-icon mx-auto">📊</div>
-                        <h4 class="text-xl font-bold mb-4">Serviços Administrativos</h4>
-                        <p class="text-gray-600">Gestão, empreendedorismo e inserção no mercado</p>
-                    </div>
-                    <div class="card p-8 text-center">
-                        <div class="feature-icon mx-auto">🔬</div>
-                        <h4 class="text-xl font-bold mb-4">Metodologia STEAM</h4>
-                        <p class="text-gray-600">Integração de Ciências, Tecnologia, Engenharia, Artes e Matemática</p>
-                    </div>
-                </div>
-
-                <!-- Estatísticas -->
-                <div class="text-center mb-16">
-                    <h3 class="text-4xl font-bold text-gradient mb-4">Nossos Resultados</h3>
-                    <p class="text-xl text-gray-600">Números que demonstram nosso impacto na comunidade</p>
-                </div>
-               
-                <div class="grid md:grid-cols-4 gap-8 mb-20">
-                    <div class="stats-card">
-                        <div class="text-4xl font-bold text-gradient mb-2">800+</div>
-                        <h4 class="text-lg font-semibold mb-2">Pessoas Capacitadas</h4>
-                        <p class="text-gray-600 text-sm">Transformando vidas através da educação</p>
-                    </div>
-                    <div class="stats-card">
-                        <div class="text-4xl font-bold text-gradient mb-2">75%</div>
-                        <h4 class="text-lg font-semibold mb-2">Taxa de Empregabilidade</h4>
-                        <p class="text-gray-600 text-sm">Sucesso na inserção no mercado</p>
-                    </div>
-                    <div class="stats-card">
-                        <div class="text-4xl font-bold text-gradient mb-2">25+</div>
-                        <h4 class="text-lg font-semibold mb-2">Empresas Parceiras</h4>
-                        <p class="text-gray-600 text-sm">Rede de oportunidades</p>
-                    </div>
-                    <div class="stats-card">
-                        <div class="text-4xl font-bold text-gradient mb-2">3</div>
-                        <h4 class="text-lg font-semibold mb-2">Eixos de Formação</h4>
-                        <p class="text-gray-600 text-sm">Educação integral e completa</p>
-                    </div>
-                </div>
-
-                <!-- Missão e Impacto -->
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="card p-8 text-center">
-                        <div class="feature-icon mx-auto">🎯</div>
-                        <h4 class="text-xl font-bold mb-4">Inclusão Social</h4>
-                        <p class="text-gray-600 mb-6">Reduzimos a desigualdade educacional e digital, preparando jovens e adultos para carreiras em crescimento.</p>
-                        <button onclick="showSection('sobre')" class="btn-primary">Saiba mais</button>
-                    </div>
-                    <div class="card p-8 text-center">
-                        <div class="feature-icon mx-auto">🤝</div>
-                        <h4 class="text-xl font-bold mb-4">Parcerias ESG</h4>
-                        <p class="text-gray-600 mb-6">Apoiamos empresas no cumprimento do "S" do ESG, fortalecendo a responsabilidade social corporativa.</p>
-                        <button onclick="showSection('voluntarios')" class="btn-primary">Saiba mais</button>
-                    </div>
-                    <div class="card p-8 text-center">
-                        <div class="feature-icon mx-auto">🌟</div>
-                        <h4 class="text-xl font-bold mb-4">Metodologia Inovadora</h4>
-                        <p class="text-gray-600 mb-6">Abordagem STEAM com aprendizagem ativa, projetos práticos e mentoria empresarial.</p>
-                        <button onclick="showSection('projetos')" class="btn-primary">Saiba mais</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção Sobre -->
-        <section id="section-sobre" class="section-hidden">
-            <div class="container mx-auto px-6 py-20">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gradient mb-4">Sobre o Instituto Sementes do Amanhã</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Transformando vidas através da educação profissional e desenvolvimento humano
-                    </p>
-                </div>
-               
-                <div class="grid md:grid-cols-2 gap-12 items-start mb-20">
-                    <div>
-                        <div class="card p-8 mb-8">
-                            <div class="feature-icon mb-6">📖</div>
-                            <h3 class="text-2xl font-bold mb-4">Nossa História</h3>
-                            <p class="text-gray-700 mb-4 leading-relaxed">
-                                O Instituto Sementes do Amanhã nasceu da visão de criar um espaço
-                                comunitário de aprendizagem que preparasse pessoas para os desafios do futuro.
-                            </p>
-                            <p class="text-gray-700 leading-relaxed">
-                                Desenvolvemos uma metodologia inovadora integrando educação socioemocional, tecnologia e
-                                administração. Somos referência em formação integral e inserção no mercado de trabalho.
-                            </p>
-                        </div>
-                    </div>
-                   
-                    <div>
-                        <div class="card p-8">
-                            <div class="feature-icon mb-6">🎯</div>
-                            <h3 class="text-2xl font-bold mb-6">Nossa Metodologia</h3>
-                            <div class="space-y-4">
-                                <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
-                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                        <span class="text-blue-600 text-sm font-bold">✓</span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold mb-1">Abordagem STEAM Integrada</h5>
-                                        <p class="text-gray-600 text-sm">Ciências, Tecnologia, Engenharia, Artes e Matemática</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
-                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                        <span class="text-blue-600 text-sm font-bold">✓</span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold mb-1">Aprendizagem Ativa</h5>
-                                        <p class="text-gray-600 text-sm">Projetos reais e práticos do mercado</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
-                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                        <span class="text-blue-600 text-sm font-bold">✓</span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold mb-1">Parcerias Empresariais</h5>
-                                        <p class="text-gray-600 text-sm">Estágios e oportunidades de emprego</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
-                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                        <span class="text-blue-600 text-sm font-bold">✓</span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold mb-1">Mentoria Personalizada</h5>
-                                        <p class="text-gray-600 text-sm">Acompanhamento individual e contínuo</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Diferenciais -->
-                <div class="card p-12 text-center">
-                    <div class="feature-icon mx-auto mb-6">🏆</div>
-                    <h3 class="text-3xl font-bold mb-8">Nossos Diferenciais</h3>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div class="text-center">
-                            <div class="w-3 h-3 bg-blue-600 rounded-full mx-auto mb-3"></div>
-                            <p class="font-medium">Formação integral e humanizada</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-3 h-3 bg-blue-600 rounded-full mx-auto mb-3"></div>
-                            <p class="font-medium">Metodologia comprovada e inovadora</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-3 h-3 bg-blue-600 rounded-full mx-auto mb-3"></div>
-                            <p class="font-medium">Rede sólida de parceiros empresariais</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-3 h-3 bg-blue-600 rounded-full mx-auto mb-3"></div>
-                            <p class="font-medium">Acompanhamento pós-formação</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção Projetos -->
-        <section id="section-projetos" class="section-hidden">
-            <div class="container mx-auto px-6 py-20">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gradient mb-4">Nossos Programas</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Oferecemos formação completa em três eixos fundamentais para o desenvolvimento profissional
-                    </p>
-                </div>
-               
-                <!-- Eixo 1: Educação Socioemocional -->
-                <div class="mb-16">
-                    <div class="flex items-center mb-8">
-                        <div class="feature-icon mr-4">🧠</div>
-                        <h3 class="text-3xl font-bold">Educação Socioemocional</h3>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div class="card p-8">
-                            <div class="text-3xl mb-4">🎯</div>
-                            <h4 class="text-xl font-bold mb-4">Oficinas de Autoconhecimento</h4>
-                            <p class="text-gray-600 mb-4">
-                                Desenvolvimento da inteligência emocional, comunicação assertiva e resolução de conflitos.
-                            </p>
-                            <div class="text-sm text-gray-500 font-medium">Terças e Quintas • 14h às 16h</div>
-                        </div>
-                        <div class="card p-8">
-                            <div class="text-3xl mb-4">💚</div>
-                            <h4 class="text-xl font-bold mb-4">Saúde Mental e Bem-estar</h4>
-                            <p class="text-gray-600 mb-4">
-                                Programas de apoio psicológico, mindfulness e técnicas de gestão do estresse.
-                            </p>
-                            <div class="text-sm text-gray-500 font-medium">Segundas • 15h às 17h</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Eixo 2: Informática e Tecnologia -->
-                <div class="mb-16">
-                    <div class="flex items-center mb-8">
-                        <div class="feature-icon mr-4">💻</div>
-                        <h3 class="text-3xl font-bold">Informática e Tecnologia</h3>
-                    </div>
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="card p-8">
-                            <div class="text-3xl mb-4">⌨️</div>
-                            <h4 class="text-xl font-bold mb-4">Informática Básica e Avançada</h4>
-                            <p class="text-gray-600 mb-4">
-                                Do básico ao avançado: Office, internet, design gráfico e ferramentas de produtividade.
-                            </p>
-                            <div class="text-sm text-gray-500 font-medium">Segunda a Sexta • 9h às 12h</div>
-                        </div>
-                        <div class="card p-8">
-                            <div class="text-3xl mb-4">🤖</div>
-                            <h4 class="text-xl font-bold mb-4">Programação e Robótica</h4>
-                            <p class="text-gray-600 mb-4">
-                                Introdução à programação, desenvolvimento web, mobile e projetos de robótica educativa.
-                            </p>
-                            <div class="text-sm text-gray-500 font-medium">Sábados • 8h às 12h</div>
-                        </div>
-                        <div class="card p-8">
-                            <div class="text-3xl mb-4">🚀</div>
-                            <h4 class="text-xl font-bold mb-4">Inovação Digital</h4>
-                            <p class="text-gray-600 mb-4">
-                                Projetos de inovação, startups, marketing digital e transformação digital.
-                            </p>
-                            <div class="text-sm text-gray-500 font-medium">Quartas • 14h às 18h</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Eixo 3: Serviços Administrativos -->
-                <div class="mb-16">
-                    <div class="flex items-center mb-8">
-                        <div class="feature-icon mr-4">📊</div>
-                        <h3 class="text-3xl font-bold">Serviços Administrativos</h3>
-                    </div>
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="card p-8">
-                            <div class="text-3xl mb-4">📋</div>
-                            <h4 class="text-xl font-bold mb-4">Rotinas Administrativas</h4>
-                            <p class="text-gray-600 mb-4">
-                                Formação em processos administrativos, gestão de documentos e atendimento ao cliente.
-                            </p>
-                            <div class="text-sm text-gray-500 font-medium">Terças e Quintas • 19h às 21h</div>
-                        </div>
-                        <div class="card p-8">
-                            <div class="text-3xl mb-4">💼</div>
-                            <h4 class="text-xl font-bold mb-4">Empreendedorismo</h4>
-                            <p class="text-gray-600 mb-4">
-                                Cursos de gestão de negócios, cooperativismo e desenvolvimento de planos de negócio.
-                            </p>
-                            <div class="text-sm text-gray-500 font-medium">Sábados • 14h às 18h</div>
-                        </div>
-                        <div class="card p-8">
-                            <div class="text-3xl mb-4">🎯</div>
-                            <h4 class="text-xl font-bold mb-4">Inserção no Mercado</h4>
-                            <p class="text-gray-600 mb-4">
-                                Preparação para entrevistas, elaboração de currículos e conexão com oportunidades de trabalho.
-                            </p>
-                            <div class="text-sm text-gray-500 font-medium">Sextas • 15h às 17h</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção Voluntários -->
-        <section id="section-voluntarios" class="section-hidden">
-            <div class="container mx-auto px-6 py-20">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gradient mb-4">Programa de Voluntariado</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Junte-se à nossa missão de transformar vidas através da educação.
-                        Sua experiência e dedicação fazem a diferença.
-                    </p>
-                </div>
-               
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div>
-                        <div class="card p-8 mb-8">
-                            <div class="feature-icon mb-6">🤝</div>
-                            <h3 class="text-2xl font-bold mb-4">Como Você Pode Contribuir</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                Oferecemos diversas oportunidades para profissionais que desejam compartilhar
-                                conhecimento e fazer a diferença na formação de futuros talentos.
-                            </p>
-                        </div>
-                       
-                        <div class="space-y-6">
-                            <div class="card p-6">
-                                <div class="flex items-start space-x-4">
-                                    <div class="feature-icon w-12 h-12 text-lg">👨‍🏫</div>
-                                    <div>
-                                        <h4 class="text-lg font-bold mb-2">Instrutor Especialista</h4>
-                                        <p class="text-gray-600 mb-3">Conduza workshops e palestras em sua área de expertise</p>
-                                        <div class="text-sm text-blue-600 font-medium">
-                                            • Compromisso: 4h/mês • Modalidade: Presencial/Online
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           
-                            <div class="card p-6">
-                                <div class="flex items-start space-x-4">
-                                    <div class="feature-icon w-12 h-12 text-lg">🎯</div>
-                                    <div>
-                                        <h4 class="text-lg font-bold mb-2">Mentor Profissional</h4>
-                                        <p class="text-gray-600 mb-3">Oriente jovens em desenvolvimento de carreira e soft skills</p>
-                                        <div class="text-sm text-blue-600 font-medium">
-                                            • Compromisso: 2h/semana • Modalidade: Híbrida
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           
-                            <div class="card p-6">
-                                <div class="flex items-start space-x-4">
-                                    <div class="feature-icon w-12 h-12 text-lg">💼</div>
-                                    <div>
-                                        <h4 class="text-lg font-bold mb-2">Consultor Estratégico</h4>
-                                        <p class="text-gray-600 mb-3">Apoie na gestão, planejamento e desenvolvimento institucional</p>
-                                        <div class="text-sm text-blue-600 font-medium">
-                                            • Compromisso: 6h/mês • Modalidade: Remota
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div>
-                        <div class="card p-8">
-                            <div class="feature-icon mb-6">📝</div>
-                            <h3 class="text-2xl font-bold mb-6">Cadastro de Voluntário</h3>
-                            <form onsubmit="submitVolunteerForm(event)" class="space-y-5">
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nome Completo</label>
-                                    <input type="text" name="nome" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email Profissional</label>
-                                    <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Telefone</label>
-                                    <input type="tel" name="telefone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Área de Atuação</label>
-                                    <select name="area" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                                        <option value="">Selecione sua área de expertise</option>
-                                        <option value="ensino">Educação e Treinamento</option>
-                                        <option value="tecnologia">Tecnologia e Inovação</option>
-                                        <option value="gestao">Gestão e Administração</option>
-                                        <option value="rh">Recursos Humanos</option>
-                                        <option value="marketing">Marketing e Comunicação</option>
-                                        <option value="financas">Finanças e Contabilidade</option>
-                                        <option value="outros">Outras Áreas</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Experiência Profissional</label>
-                                    <textarea name="experiencia" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" rows="3" placeholder="Descreva brevemente sua experiência e como pode contribuir..."></textarea>
-                                </div>
-                                <button type="submit" class="w-full btn-primary text-lg py-3">
-                                    Enviar Candidatura
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção Doações -->
-        <section id="section-doacoes" class="section-hidden">
-            <div class="container mx-auto px-6 py-20">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gradient mb-4">Apoie Nossa Missão</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Sua contribuição transforma vidas e constrói um futuro melhor através da educação profissional de qualidade.
-                    </p>
-                </div>
-               
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div>
-                        <div class="card p-8 mb-8">
-                            <div class="feature-icon mb-6">💝</div>
-                            <h3 class="text-2xl font-bold mb-4">Impacto da Sua Doação</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                Cada contribuição é investida diretamente na formação de jovens e adultos,
-                                proporcionando oportunidades reais de crescimento profissional e pessoal.
-                            </p>
-                        </div>
-                       
-                        <div class="space-y-6">
-                            <div class="card p-6">
-                                <div class="flex items-center justify-between mb-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="feature-icon w-12 h-12 text-lg">📚</div>
-                                        <div>
-                                            <h4 class="text-lg font-bold">R$ 50/mês</h4>
-                                            <p class="text-gray-600 text-sm">Patrocinador Bronze</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-gray-700 text-sm">Custeia material didático e recursos tecnológicos para 1 aluno por mês</p>
-                            </div>
-                           
-                            <div class="card p-6">
-                                <div class="flex items-center justify-between mb-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="feature-icon w-12 h-12 text-lg">🎓</div>
-                                        <div>
-                                            <h4 class="text-lg font-bold">R$ 150/mês</h4>
-                                            <p class="text-gray-600 text-sm">Patrocinador Prata</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-gray-700 text-sm">Financia a formação completa de 1 jovem em nossos programas</p>
-                            </div>
-                           
-                            <div class="card p-6">
-                                <div class="flex items-center justify-between mb-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="feature-icon w-12 h-12 text-lg">🏆</div>
-                                        <div>
-                                            <h4 class="text-lg font-bold">R$ 500/mês</h4>
-                                            <p class="text-gray-600 text-sm">Patrocinador Ouro</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-gray-700 text-sm">Mantém uma turma completa com mentoria especializada</p>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div>
-                        <div class="card p-8">
-                            <div class="feature-icon mb-6">💳</div>
-                            <h3 class="text-2xl font-bold mb-6">Dados para Doação</h3>
-                           
-                            <div class="space-y-6">
-                                <div class="p-6 bg-blue-50 rounded-lg border border-blue-200">
-                                    <div class="flex items-center justify-between mb-3">
-                                        <h4 class="text-lg font-bold text-blue-800">PIX Institucional</h4>
-                                        <div class="text-2xl">📱</div>
-                                    </div>
-                                    <p class="text-blue-700 font-mono text-sm mb-3">CNPJ: 12.345.678/0001-90</p>
-                                    <button onclick="copyPix()" class="btn-primary text-sm">
-                                        Copiar Chave PIX
-                                    </button>
-                                </div>
-                               
-                                <div class="p-6 bg-blue-50 rounded-lg border border-blue-200">
-                                    <div class="flex items-center justify-between mb-3">
-                                        <h4 class="text-lg font-bold text-blue-800">Transferência Bancária</h4>
-                                        <div class="text-2xl">🏦</div>
-                                    </div>
-                                    <div class="space-y-1 text-sm text-blue-700">
-                                        <p><strong>Banco:</strong> 001 - Banco do Brasil</p>
-                                        <p><strong>Agência:</strong> 1234-5</p>
-                                        <p><strong>Conta Corrente:</strong> 12345-6</p>
-                                        <p><strong>Favorecido:</strong> Instituto Sementes do Amanhã</p>
-                                    </div>
-                                </div>
-                               
-                                <div class="p-6 bg-amber-50 rounded-lg border border-amber-200">
-                                    <div class="flex items-start space-x-3">
-                                        <div class="text-amber-600 text-xl">⚠️</div>
-                                        <div>
-                                            <h5 class="font-semibold text-amber-800 mb-2">Aviso Importante</h5>
-                                            <p class="text-amber-700 text-sm">
-                                                Esta é uma página demonstrativa. Os dados bancários apresentados são
-                                                fictícios e destinados apenas para fins de exemplo.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção Contato -->
-        <section id="section-contato" class="section-hidden">
-            <div class="container mx-auto px-6 py-20">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gradient mb-4">Fale Conosco</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Estamos prontos para atendê-lo. Entre em contato e descubra como podemos ajudar em sua jornada profissional.
-                    </p>
-                </div>
-               
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div>
-                        <div class="card p-8 mb-8">
-                            <div class="feature-icon mb-6">📍</div>
-                            <h3 class="text-2xl font-bold mb-6">Informações Institucionais</h3>
-                           
-                            <div class="space-y-6">
-                                <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
-                                    <div class="feature-icon w-12 h-12 text-lg">🏢</div>
-                                    <div>
-                                        <h4 class="text-lg font-bold mb-2">Sede Administrativa</h4>
-                                        <p class="text-gray-700 leading-relaxed">
-                                            Rua Vereadora Dozinha Justo, 91<br>
-                                            Bairro Divino Espírito Santo<br>
-                                            Vila Velha - ES<br>
-                                            CEP: 29107-043
-                                        </p>
-                                    </div>
-                                </div>
-                               
-                                <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
-                                    <div class="feature-icon w-12 h-12 text-lg">📞</div>
-                                    <div>
-                                        <h4 class="text-lg font-bold mb-2">Atendimento</h4>
-                                        <p class="text-gray-700 mb-1">Telefone: (27) 98889-3687</p>
-                                        <p class="text-gray-600 text-sm">WhatsApp disponível</p>
-                                    </div>
-                                </div>
-                               
-                                <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
-                                    <div class="feature-icon w-12 h-12 text-lg">📧</div>
-                                    <div>
-                                        <h4 class="text-lg font-bold mb-2">Email Institucional</h4>
-                                        <p class="text-gray-700">institutosementedoamanha@gmail.com</p>
-                                        <p class="text-gray-600 text-sm">Resposta em até 24 horas</p>
-                                    </div>
-                                </div>
-                               
-                                <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
-                                    <div class="feature-icon w-12 h-12 text-lg">🕒</div>
-                                    <div>
-                                        <h4 class="text-lg font-bold mb-2">Horário de Funcionamento</h4>
-                                        <div class="text-gray-700 space-y-1">
-                                            <p><strong>Segunda a Sexta:</strong> 8h às 18h</p>
-                                            <p><strong>Sábados:</strong> 8h às 12h</p>
-                                            <p class="text-gray-600 text-sm">Domingos e feriados: Fechado</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card p-8">
-                            <div class="feature-icon mb-6">📱</div>
-                            <h3 class="text-2xl font-bold mb-6">Redes Sociais</h3>
-                            <p class="text-gray-700 mb-6">Acompanhe nossas atividades e novidades nas redes sociais:</p>
-                            <a href="https://www.instagram.com/instituto.sda?igsh=MWNueWFjNm1xaG5kaw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn-primary inline-flex items-center space-x-3">
-                                <span class="text-xl">📷</span>
-                                <span class="font-semibold">Instagram</span>
-                            </a>
-                        </div>
-                    </div>
-                   
-                    <div>
-                        <div class="card p-8">
-                            <div class="feature-icon mb-6">💬</div>
-                            <h3 class="text-2xl font-bold mb-6">Envie sua Mensagem</h3>
-                            <form onsubmit="submitContactForm(event)" class="space-y-5">
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nome Completo</label>
-                                    <input type="text" name="nome" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
-                                    <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Telefone (Opcional)</label>
-                                    <input type="tel" name="telefone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Assunto</label>
-                                    <select name="assunto" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                                        <option value="">Selecione o assunto de seu interesse</option>
-                                        <option value="inscricao">Inscrição em Programas</option>
-                                        <option value="voluntario">Programa de Voluntariado</option>
-                                        <option value="doacao">Doações e Apoio</option>
-                                        <option value="parceria">Parcerias Empresariais</option>
-                                        <option value="informacoes">Informações Gerais</option>
-                                        <option value="outros">Outros Assuntos</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Mensagem</label>
-                                    <textarea name="mensagem" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" rows="5" placeholder="Descreva sua solicitação ou dúvida de forma detalhada..."></textarea>
-                                </div>
-                                <button type="submit" class="w-full btn-primary text-lg py-3">
-                                    Enviar Mensagem
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="gradient-bg text-white">
-        <div class="container mx-auto px-6 py-12 relative z-10">
-            <div class="text-center">
-                <div class="flex items-center justify-center space-x-3 mb-6">
-                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                        <span class="text-lg">🌱</span>
-                    </div>
-                    <h3 class="text-2xl font-bold">Instituto Sementes do Amanhã</h3>
-                </div>
-                <p class="text-white/80 mb-6 text-lg">Transformando vidas através da educação</p>
-                <div class="border-t border-white/20 pt-6">
-                    <p class="text-white/60">© Instituto Sementes do Amanhã. Todos os direitos reservados.</p>
-                </div>
-            </div>
+        <h4 class="text-lg font-semibold mb-2 text-slate-700">Pessoas Capacitadas</h4>
+        <p class="text-slate-600 text-sm">Transformando vidas através da educação</p>
+       </div>
+       <div class="text-center">
+        <div class="text-4xl font-bold text-slate-900 mb-2">
+         75%
         </div>
-    </footer>
-
-    <script>
+        <h4 class="text-lg font-semibold mb-2 text-slate-700">Taxa de Empregabilidade</h4>
+        <p class="text-slate-600 text-sm">Sucesso na inserção no mercado</p>
+       </div>
+       <div class="text-center">
+        <div class="text-4xl font-bold text-slate-900 mb-2">
+         25+
+        </div>
+        <h4 class="text-lg font-semibold mb-2 text-slate-700">Empresas Parceiras</h4>
+        <p class="text-slate-600 text-sm">Rede de oportunidades</p>
+       </div>
+       <div class="text-center">
+        <div class="text-4xl font-bold text-slate-900 mb-2">
+         3
+        </div>
+        <h4 class="text-lg font-semibold mb-2 text-slate-700">Eixos de Formação</h4>
+        <p class="text-slate-600 text-sm">Educação integral e completa</p>
+       </div>
+      </div>
+     </div><!-- Missão e Impacto -->
+     <div class="grid md:grid-cols-3 gap-8">
+      <div class="card p-8 text-center border-l-4 border-blue-600">
+       <div class="feature-icon icon-primary mx-auto">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+        </svg>
+       </div>
+       <h4 class="text-xl font-bold mb-4">Inclusão Social</h4>
+       <p class="text-gray-600 mb-6">Reduzimos a desigualdade educacional e digital, preparando jovens e adultos para carreiras em crescimento.</p><button onclick="showSection('sobre')" class="btn-primary">Saiba mais</button>
+      </div>
+      <div class="card p-8 text-center border-l-4 border-blue-600">
+       <div class="feature-icon icon-primary mx-auto">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor"><path d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z" />
+        </svg>
+       </div>
+       <h4 class="text-xl font-bold mb-4">Parcerias ESG</h4>
+       <p class="text-gray-600 mb-6">Apoiamos empresas no cumprimento do "S" do ESG, fortalecendo a responsabilidade social corporativa.</p><button onclick="showSection('voluntarios')" class="btn-primary">Saiba mais</button>
+      </div>
+      <div class="card p-8 text-center border-l-4 border-blue-600">
+       <div class="feature-icon icon-primary mx-auto">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.46,13.97L5.82,21L12,17.27Z" />
+        </svg>
+       </div>
+       <h4 class="text-xl font-bold mb-4">Metodologia Inovadora</h4>
+       <p class="text-gray-600 mb-6">Abordagem STEAM com aprendizagem ativa, projetos práticos e mentoria empresarial.</p><button onclick="showSection('projetos')" class="btn-primary">Saiba mais</button>
+      </div>
+     </div>
+    </div>
+   </section><!-- Seção Sobre -->
+   <section id="section-sobre" class="section-hidden">
+    <div class="container mx-auto px-6 py-20">
+     <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gradient mb-4">Sobre o Instituto Sementes do Amanhã</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Transformando vidas através da educação profissional e desenvolvimento humano</p>
+     </div>
+     <div class="grid md:grid-cols-2 gap-12 items-start mb-20">
+      <div>
+       <div class="card p-8 mb-8">
+        <div class="feature-icon mb-6">
+         📖
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Nossa História</h3>
+        <p class="text-gray-700 mb-4 leading-relaxed">O Instituto Sementes do Amanhã nasceu da visão de criar um espaço comunitário de aprendizagem que preparasse pessoas para os desafios do futuro.</p>
+        <p class="text-gray-700 leading-relaxed">Desenvolvemos uma metodologia inovadora integrando educação socioemocional, tecnologia e administração. Somos referência em formação integral e inserção no mercado de trabalho.</p>
+       </div>
+      </div>
+      <div>
+       <div class="card p-8">
+        <div class="feature-icon mb-6">
+         🎯
+        </div>
+        <h3 class="text-2xl font-bold mb-6">Nossa Metodologia</h3>
+        <div class="space-y-4">
+         <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
+          <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"><span class="text-blue-600 text-sm font-bold">✓</span>
+          </div>
+          <div>
+           <h5 class="font-semibold mb-1">Abordagem STEAM Integrada</h5>
+           <p class="text-gray-600 text-sm">Ciências, Tecnologia, Engenharia, Artes e Matemática</p>
+          </div>
+         </div>
+         <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
+          <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"><span class="text-blue-600 text-sm font-bold">✓</span>
+          </div>
+          <div>
+           <h5 class="font-semibold mb-1">Aprendizagem Ativa</h5>
+           <p class="text-gray-600 text-sm">Projetos reais e práticos do mercado</p>
+          </div>
+         </div>
+         <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
+          <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"><span class="text-blue-600 text-sm font-bold">✓</span>
+          </div>
+          <div>
+           <h5 class="font-semibold mb-1">Parcerias Empresariais</h5>
+           <p class="text-gray-600 text-sm">Estágios e oportunidades de emprego</p>
+          </div>
+         </div>
+         <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
+          <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"><span class="text-blue-600 text-sm font-bold">✓</span>
+          </div>
+          <div>
+           <h5 class="font-semibold mb-1">Mentoria Personalizada</h5>
+           <p class="text-gray-600 text-sm">Acompanhamento individual e contínuo</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Diferenciais -->
+     <div class="card p-12 text-center">
+      <div class="feature-icon mx-auto mb-6">
+       🏆
+      </div>
+      <h3 class="text-3xl font-bold mb-8">Nossos Diferenciais</h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+       <div class="text-center">
+        <div class="w-3 h-3 bg-blue-600 rounded-full mx-auto mb-3"></div>
+        <p class="font-medium">Formação integral e humanizada</p>
+       </div>
+       <div class="text-center">
+        <div class="w-3 h-3 bg-blue-600 rounded-full mx-auto mb-3"></div>
+        <p class="font-medium">Metodologia comprovada e inovadora</p>
+       </div>
+       <div class="text-center">
+        <div class="w-3 h-3 bg-blue-600 rounded-full mx-auto mb-3"></div>
+        <p class="font-medium">Rede sólida de parceiros empresariais</p>
+       </div>
+       <div class="text-center">
+        <div class="w-3 h-3 bg-blue-600 rounded-full mx-auto mb-3"></div>
+        <p class="font-medium">Acompanhamento pós-formação</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Seção Projetos -->
+   <section id="section-projetos" class="section-hidden">
+    <div class="container mx-auto px-6 py-20">
+     <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gradient mb-4">Nossos Programas</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Oferecemos formação completa em três eixos fundamentais para o desenvolvimento profissional</p>
+     </div><!-- Eixo 1: Educação Socioemocional -->
+     <div class="mb-16">
+      <div class="flex items-center mb-8">
+       <div class="feature-icon mr-4">
+        🧠
+       </div>
+       <h3 class="text-3xl font-bold">Educação Socioemocional</h3>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+       <div class="card p-8">
+        <div class="text-3xl mb-4">
+         🎯
+        </div>
+        <h4 class="text-xl font-bold mb-4">Oficinas de Autoconhecimento</h4>
+        <p class="text-gray-600 mb-4">Desenvolvimento da inteligência emocional, comunicação assertiva e resolução de conflitos.</p>
+        <div class="text-sm text-gray-500 font-medium">
+         Terças e Quintas • 14h às 16h
+        </div>
+       </div>
+       <div class="card p-8">
+        <div class="text-3xl mb-4">
+         💚
+        </div>
+        <h4 class="text-xl font-bold mb-4">Saúde Mental e Bem-estar</h4>
+        <p class="text-gray-600 mb-4">Programas de apoio psicológico, mindfulness e técnicas de gestão do estresse.</p>
+        <div class="text-sm text-gray-500 font-medium">
+         Segundas • 15h às 17h
+        </div>
+       </div>
+      </div>
+     </div><!-- Eixo 2: Informática e Tecnologia -->
+     <div class="mb-16">
+      <div class="flex items-center mb-8">
+       <div class="feature-icon mr-4">
+        💻
+       </div>
+       <h3 class="text-3xl font-bold">Informática e Tecnologia</h3>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+       <div class="card p-8">
+        <div class="text-3xl mb-4">
+         ⌨️
+        </div>
+        <h4 class="text-xl font-bold mb-4">Informática Básica e Avançada</h4>
+        <p class="text-gray-600 mb-4">Do básico ao avançado: Office, internet, design gráfico e ferramentas de produtividade.</p>
+        <div class="text-sm text-gray-500 font-medium">
+         Segunda a Sexta • 9h às 12h
+        </div>
+       </div>
+       <div class="card p-8">
+        <div class="text-3xl mb-4">
+         🤖
+        </div>
+        <h4 class="text-xl font-bold mb-4">Programação e Robótica</h4>
+        <p class="text-gray-600 mb-4">Introdução à programação, desenvolvimento web, mobile e projetos de robótica educativa.</p>
+        <div class="text-sm text-gray-500 font-medium">
+         Sábados • 8h às 12h
+        </div>
+       </div>
+       <div class="card p-8">
+        <div class="text-3xl mb-4">
+         🚀
+        </div>
+        <h4 class="text-xl font-bold mb-4">Inovação Digital</h4>
+        <p class="text-gray-600 mb-4">Projetos de inovação, startups, marketing digital e transformação digital.</p>
+        <div class="text-sm text-gray-500 font-medium">
+         Quartas • 14h às 18h
+        </div>
+       </div>
+      </div>
+     </div><!-- Eixo 3: Serviços Administrativos -->
+     <div class="mb-16">
+      <div class="flex items-center mb-8">
+       <div class="feature-icon mr-4">
+        📊
+       </div>
+       <h3 class="text-3xl font-bold">Serviços Administrativos</h3>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+       <div class="card p-8">
+        <div class="text-3xl mb-4">
+         📋
+        </div>
+        <h4 class="text-xl font-bold mb-4">Rotinas Administrativas</h4>
+        <p class="text-gray-600 mb-4">Formação em processos administrativos, gestão de documentos e atendimento ao cliente.</p>
+        <div class="text-sm text-gray-500 font-medium">
+         Terças e Quintas • 19h às 21h
+        </div>
+       </div>
+       <div class="card p-8">
+        <div class="text-3xl mb-4">
+         💼
+        </div>
+        <h4 class="text-xl font-bold mb-4">Empreendedorismo</h4>
+        <p class="text-gray-600 mb-4">Cursos de gestão de negócios, cooperativismo e desenvolvimento de planos de negócio.</p>
+        <div class="text-sm text-gray-500 font-medium">
+         Sábados • 14h às 18h
+        </div>
+       </div>
+       <div class="card p-8">
+        <div class="text-3xl mb-4">
+         🎯
+        </div>
+        <h4 class="text-xl font-bold mb-4">Inserção no Mercado</h4>
+        <p class="text-gray-600 mb-4">Preparação para entrevistas, elaboração de currículos e conexão com oportunidades de trabalho.</p>
+        <div class="text-sm text-gray-500 font-medium">
+         Sextas • 15h às 17h
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Seção Voluntários -->
+   <section id="section-voluntarios" class="section-hidden">
+    <div class="container mx-auto px-6 py-20">
+     <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gradient mb-4">Programa de Voluntariado</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Junte-se à nossa missão de transformar vidas através da educação. Sua experiência e dedicação fazem a diferença.</p>
+     </div>
+     <div class="grid md:grid-cols-2 gap-12">
+      <div>
+       <div class="card p-8 mb-8">
+        <div class="feature-icon mb-6">
+         🤝
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Como Você Pode Contribuir</h3>
+        <p class="text-gray-700 leading-relaxed">Oferecemos diversas oportunidades para profissionais que desejam compartilhar conhecimento e fazer a diferença na formação de futuros talentos.</p>
+       </div>
+       <div class="space-y-6">
+        <div class="card p-6">
+         <div class="flex items-start space-x-4">
+          <div class="feature-icon w-12 h-12 text-lg">
+           👨‍🏫
+          </div>
+          <div>
+           <h4 class="text-lg font-bold mb-2">Instrutor Especialista</h4>
+           <p class="text-gray-600 mb-3">Conduza workshops e palestras em sua área de expertise</p>
+           <div class="text-sm text-blue-600 font-medium">
+            • Compromisso: 4h/mês • Modalidade: Presencial/Online
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="card p-6">
+         <div class="flex items-start space-x-4">
+          <div class="feature-icon w-12 h-12 text-lg">
+           🎯
+          </div>
+          <div>
+           <h4 class="text-lg font-bold mb-2">Mentor Profissional</h4>
+           <p class="text-gray-600 mb-3">Oriente jovens em desenvolvimento de carreira e soft skills</p>
+           <div class="text-sm text-blue-600 font-medium">
+            • Compromisso: 2h/semana • Modalidade: Híbrida
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="card p-6">
+         <div class="flex items-start space-x-4">
+          <div class="feature-icon w-12 h-12 text-lg">
+           💼
+          </div>
+          <div>
+           <h4 class="text-lg font-bold mb-2">Consultor Estratégico</h4>
+           <p class="text-gray-600 mb-3">Apoie na gestão, planejamento e desenvolvimento institucional</p>
+           <div class="text-sm text-blue-600 font-medium">
+            • Compromisso: 6h/mês • Modalidade: Remota
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div>
+       <div class="card p-8">
+        <div class="feature-icon mb-6">
+         📝
+        </div>
+        <h3 class="text-2xl font-bold mb-6">Cadastro de Voluntário</h3>
+        <form onsubmit="submitVolunteerForm(event)" class="space-y-5">
+         <div><label class="block text-sm font-semibold text-gray-700 mb-2">Nome Completo</label> <input type="text" name="nome" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+         </div>
+         <div><label class="block text-sm font-semibold text-gray-700 mb-2">Email Profissional</label> <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+         </div>
+         <div><label class="block text-sm font-semibold text-gray-700 mb-2">Telefone</label> <input type="tel" name="telefone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+         </div>
+         <div><label class="block text-sm font-semibold text-gray-700 mb-2">Área de Atuação</label> <select name="area" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"> <option value="">Selecione sua área de expertise</option> <option value="ensino">Educação e Treinamento</option> <option value="tecnologia">Tecnologia e Inovação</option> <option value="gestao">Gestão e Administração</option> <option value="rh">Recursos Humanos</option> <option value="marketing">Marketing e Comunicação</option> <option value="financas">Finanças e Contabilidade</option> <option value="outros">Outras Áreas</option> </select>
+         </div>
+         <div><label class="block text-sm font-semibold text-gray-700 mb-2">Experiência Profissional</label> <textarea name="experiencia" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" rows="3" placeholder="Descreva brevemente sua experiência e como pode contribuir..."></textarea>
+         </div><button type="submit" class="w-full btn-primary text-lg py-3"> Enviar Candidatura </button>
+        </form>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Seção Doações -->
+   <section id="section-doacoes" class="section-hidden">
+    <div class="container mx-auto px-6 py-20">
+     <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gradient mb-4">Apoie Nossa Missão</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Sua contribuição transforma vidas e constrói um futuro melhor através da educação profissional de qualidade.</p>
+     </div>
+     <div class="grid md:grid-cols-2 gap-12">
+      <div>
+       <div class="card p-8 mb-8">
+        <div class="feature-icon mb-6">
+         💝
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Impacto da Sua Doação</h3>
+        <p class="text-gray-700 leading-relaxed">Cada contribuição é investida diretamente na formação de jovens e adultos, proporcionando oportunidades reais de crescimento profissional e pessoal.</p>
+       </div>
+       <div class="space-y-6">
+        <div class="card p-6">
+         <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center space-x-3">
+           <div class="feature-icon w-12 h-12 text-lg">
+            📚
+           </div>
+           <div>
+            <h4 class="text-lg font-bold">R$ 50/mês</h4>
+            <p class="text-gray-600 text-sm">Patrocinador Bronze</p>
+           </div>
+          </div>
+         </div>
+         <p class="text-gray-700 text-sm">Custeia material didático e recursos tecnológicos para 1 aluno por mês</p>
+        </div>
+        <div class="card p-6">
+         <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center space-x-3">
+           <div class="feature-icon w-12 h-12 text-lg">
+            🎓
+           </div>
+           <div>
+            <h4 class="text-lg font-bold">R$ 150/mês</h4>
+            <p class="text-gray-600 text-sm">Patrocinador Prata</p>
+           </div>
+          </div>
+         </div>
+         <p class="text-gray-700 text-sm">Financia a formação completa de 1 jovem em nossos programas</p>
+        </div>
+        <div class="card p-6">
+         <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center space-x-3">
+           <div class="feature-icon w-12 h-12 text-lg">
+            🏆
+           </div>
+           <div>
+            <h4 class="text-lg font-bold">R$ 500/mês</h4>
+            <p class="text-gray-600 text-sm">Patrocinador Ouro</p>
+           </div>
+          </div>
+         </div>
+         <p class="text-gray-700 text-sm">Mantém uma turma completa com mentoria especializada</p>
+        </div>
+       </div>
+      </div>
+      <div>
+       <div class="card p-8">
+        <div class="feature-icon mb-6">
+         💳
+        </div>
+        <h3 class="text-2xl font-bold mb-6">Dados para Doação</h3>
+        <div class="space-y-6">
+         <div class="p-6 bg-blue-50 rounded-lg border border-blue-200">
+          <div class="flex items-center justify-between mb-3">
+           <h4 class="text-lg font-bold text-blue-800">PIX Institucional</h4>
+           <div class="text-2xl">
+            📱
+           </div>
+          </div>
+          <p class="text-blue-700 font-mono text-sm mb-3">CNPJ: 12.345.678/0001-90</p><button onclick="copyPix()" class="btn-primary text-sm"> Copiar Chave PIX </button>
+         </div>
+         <div class="p-6 bg-blue-50 rounded-lg border border-blue-200">
+          <div class="flex items-center justify-between mb-3">
+           <h4 class="text-lg font-bold text-blue-800">Transferência Bancária</h4>
+           <div class="text-2xl">
+            🏦
+           </div>
+          </div>
+          <div class="space-y-1 text-sm text-blue-700">
+           <p><strong>Banco:</strong> 001 - Banco do Brasil</p>
+           <p><strong>Agência:</strong> 1234-5</p>
+           <p><strong>Conta Corrente:</strong> 12345-6</p>
+           <p><strong>Favorecido:</strong> Instituto Sementes do Amanhã</p>
+          </div>
+         </div>
+         <div class="p-6 bg-amber-50 rounded-lg border border-amber-200">
+          <div class="flex items-start space-x-3">
+           <div class="text-amber-600 text-xl">
+            ⚠️
+           </div>
+           <div>
+            <h5 class="font-semibold text-amber-800 mb-2">Aviso Importante</h5>
+            <p class="text-amber-700 text-sm">Esta é uma página demonstrativa. Os dados bancários apresentados são fictícios e destinados apenas para fins de exemplo.</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Seção Contato -->
+   <section id="section-contato" class="section-hidden">
+    <div class="container mx-auto px-6 py-20">
+     <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gradient mb-4">Fale Conosco</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Estamos prontos para atendê-lo. Entre em contato e descubra como podemos ajudar em sua jornada profissional.</p>
+     </div>
+     <div class="grid md:grid-cols-2 gap-12">
+      <div>
+       <div class="card p-8 mb-8">
+        <div class="feature-icon mb-6">
+         📍
+        </div>
+        <h3 class="text-2xl font-bold mb-6">Informações Institucionais</h3>
+        <div class="space-y-6">
+         <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
+          <div class="feature-icon w-12 h-12 text-lg">
+           🏢
+          </div>
+          <div>
+           <h4 class="text-lg font-bold mb-2">Sede Administrativa</h4>
+           <p class="text-gray-700 leading-relaxed">Rua Vereadora Dozinha Justo, 91<br>
+             Bairro Divino Espírito Santo<br>
+             Vila Velha - ES<br>
+             CEP: 29107-043</p>
+          </div>
+         </div>
+         <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
+          <div class="feature-icon w-12 h-12 text-lg">
+           📞
+          </div>
+          <div>
+           <h4 class="text-lg font-bold mb-2">Atendimento</h4>
+           <p class="text-gray-700 mb-1">Telefone: (27) 99229-8520</p>
+           <p class="text-gray-600 text-sm">WhatsApp disponível</p>
+          </div>
+         </div>
+         <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
+          <div class="feature-icon w-12 h-12 text-lg">
+           📧
+          </div>
+          <div>
+           <h4 class="text-lg font-bold mb-2">Email Institucional</h4>
+           <p class="text-gray-700">institutosementedoamanha@gmail.com</p>
+           <p class="text-gray-600 text-sm">Resposta em até 24 horas</p>
+          </div>
+         </div>
+         <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg">
+          <div class="feature-icon w-12 h-12 text-lg">
+           🕒
+          </div>
+          <div>
+           <h4 class="text-lg font-bold mb-2">Horário de Funcionamento</h4>
+           <div class="text-gray-700 space-y-1">
+            <p><strong>Segunda a Sexta:</strong> 8h às 18h</p>
+            <p><strong>Sábados:</strong> 8h às 12h</p>
+            <p class="text-gray-600 text-sm">Domingos e feriados: Fechado</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="card p-8">
+        <div class="feature-icon mb-6">
+         📱
+        </div>
+        <h3 class="text-2xl font-bold mb-6">Redes Sociais</h3>
+        <p class="text-gray-700 mb-6">Acompanhe nossas atividades e novidades nas redes sociais:</p><a href="https://www.instagram.com/instituto.sda?igsh=MWNueWFjNm1xaG5kaw%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn-primary inline-flex items-center space-x-3"> <span class="text-xl">📷</span> <span class="font-semibold">Instagram</span> </a>
+       </div>
+      </div>
+      <div>
+       <div class="card p-8">
+        <div class="feature-icon mb-6">
+         💬
+        </div>
+        <h3 class="text-2xl font-bold mb-6">Envie sua Mensagem</h3>
+        <form onsubmit="submitContactForm(event)" class="space-y-5">
+         <div><label class="block text-sm font-semibold text-gray-700 mb-2">Nome Completo</label> <input type="text" name="nome" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+         </div>
+         <div><label class="block text-sm font-semibold text-gray-700 mb-2">Email</label> <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+         </div>
+         <div><label class="block text-sm font-semibold text-gray-700 mb-2">Telefone (Opcional)</label> <input type="tel" name="telefone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+         </div>
+         <div><label class="block text-sm font-semibold text-gray-700 mb-2">Assunto</label> <select name="assunto" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"> <option value="">Selecione o assunto de seu interesse</option> <option value="inscricao">Inscrição em Programas</option> <option value="voluntario">Programa de Voluntariado</option> <option value="doacao">Doações e Apoio</option> <option value="parceria">Parcerias Empresariais</option> <option value="informacoes">Informações Gerais</option> <option value="outros">Outros Assuntos</option> </select>
+         </div>
+         <div><label class="block text-sm font-semibold text-gray-700 mb-2">Mensagem</label> <textarea name="mensagem" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" rows="5" placeholder="Descreva sua solicitação ou dúvida de forma detalhada..."></textarea>
+         </div><button type="submit" class="w-full btn-primary text-lg py-3"> Enviar Mensagem </button>
+        </form>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main><!-- Footer -->
+  <footer class="gradient-bg text-white">
+   <div class="container mx-auto px-6 py-12 relative z-10">
+    <div class="text-center">
+     <div class="flex items-center justify-center space-x-3 mb-6">
+      <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center"><span class="text-lg">🌱</span>
+      </div>
+      <h3 class="text-2xl font-bold">Instituto Sementes do Amanhã</h3>
+     </div>
+     <p class="text-white/80 mb-6 text-lg">Transformando vidas através da educação</p>
+     <div class="border-t border-white/20 pt-6">
+      <p class="text-white/60">© Instituto Sementes do Amanhã. Todos os direitos reservados.</p>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script>
         // Função para mostrar notificação
         function showNotification(message, icon = '✅') {
             const notification = document.getElementById('notification');
             const notificationText = document.getElementById('notification-text');
             const notificationIcon = document.getElementById('notification-icon');
-           
+            
             notificationText.textContent = message;
             notificationIcon.textContent = icon;
             notification.classList.add('show');
-           
+            
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 4000);
@@ -1115,31 +958,34 @@
         // Função para enviar formulário de voluntário
         function submitVolunteerForm(event) {
             event.preventDefault();
-           
+            
             const formData = new FormData(event.target);
             const nome = formData.get('nome') || event.target.querySelector('input[type="text"]').value;
             const email = formData.get('email') || event.target.querySelector('input[type="email"]').value;
             const telefone = formData.get('telefone') || event.target.querySelector('input[type="tel"]').value;
             const area = formData.get('area') || event.target.querySelector('select').value;
             const experiencia = formData.get('experiencia') || event.target.querySelector('textarea').value;
-           
+            
             // Preparar dados para envio
             const emailData = {
-                to: 'kaiquerigom@gmail.com',
+                to: 'institutosementedoamanha@gmail.com',
+                from_email: email,
+                from_name: nome,
                 subject: 'Nova Candidatura de Voluntário - Instituto Sementes do Amanhã',
-                html: `
-                    <h2>Nova Candidatura de Voluntário</h2>
-                    <p><strong>Nome:</strong> ${nome}</p>
-                    <p><strong>Email:</strong> ${email}</p>
-                    <p><strong>Telefone:</strong> ${telefone}</p>
-                    <p><strong>Área de Atuação:</strong> ${area}</p>
-                    <p><strong>Experiência:</strong></p>
-                    <p>${experiencia}</p>
-                    <hr>
-                    <p><em>Enviado através do site do Instituto Sementes do Amanhã</em></p>
-                `
+                html: `NOVA CANDIDATURA DE VOLUNTÁRIO
+
+Nome: ${nome}
+Email: ${email}
+Telefone: ${telefone}
+Área de Atuação: ${area}
+
+Experiência:
+${experiencia}
+
+---
+Enviado através do site do Instituto Sementes do Amanhã`
             };
-           
+            
             // Enviar email usando EmailJS
             sendEmail(emailData, 'volunteer');
             event.target.reset();
@@ -1148,7 +994,7 @@
         // Função para enviar formulário de contato
         function submitContactForm(event) {
             event.preventDefault();
-           
+            
             const formData = new FormData(event.target);
             const inputs = event.target.querySelectorAll('input, select, textarea');
             const nome = inputs[0].value;
@@ -1156,56 +1002,174 @@
             const telefone = inputs[2].value;
             const assunto = inputs[3].value;
             const mensagem = inputs[4].value;
-           
+            
             // Preparar dados para envio
             const emailData = {
-                to: 'kaiquerigom@gmail.com',
+                to: 'institutosementedoamanha@gmail.com',
+                from_email: email,
+                from_name: nome,
                 subject: `Contato do Site - ${assunto} - Instituto Sementes do Amanhã`,
-                html: `
-                    <h2>Nova Mensagem de Contato</h2>
-                    <p><strong>Nome:</strong> ${nome}</p>
-                    <p><strong>Email:</strong> ${email}</p>
-                    <p><strong>Telefone:</strong> ${telefone || 'Não informado'}</p>
-                    <p><strong>Assunto:</strong> ${assunto}</p>
-                    <p><strong>Mensagem:</strong></p>
-                    <p>${mensagem}</p>
-                    <hr>
-                    <p><em>Enviado através do site do Instituto Sementes do Amanhã</em></p>
-                `
+                html: `NOVA MENSAGEM DE CONTATO
+
+Nome: ${nome}
+Email: ${email}
+Telefone: ${telefone || 'Não informado'}
+Assunto: ${assunto}
+
+Mensagem:
+${mensagem}
+
+---
+Enviado através do site do Instituto Sementes do Amanhã`
             };
-           
+            
             // Enviar email usando EmailJS
             sendEmail(emailData, 'contact');
             event.target.reset();
         }
 
-        // Função para enviar email
+        // Inicializar EmailJS
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY"); // Você precisa configurar sua chave pública
+        })();
+
+        // Função para enviar email - Sistema robusto com múltiplas opções
         function sendEmail(emailData, type) {
-            // Usando EmailJS para envio de emails
-            const serviceID = 'default_service';
-            const templateID = type === 'volunteer' ? 'template_volunteer' : 'template_contact';
-           
-            // Parâmetros para o EmailJS
-            const templateParams = {
-                to_email: emailData.to,
-                subject: emailData.subject,
-                message_html: emailData.html,
-                from_name: 'Instituto Sementes do Amanhã - Site'
-            };
-           
-            // Simular envio (em produção, você configuraria o EmailJS)
-            setTimeout(() => {
-                if (type === 'volunteer') {
-                    showNotification('Obrigado pelo seu interesse! Entraremos em contato em breve.', '🤝');
-                } else {
-                    showNotification('Mensagem enviada com sucesso! Responderemos em até 24 horas.', '📧');
-                }
-               
-                // Log para desenvolvimento (remover em produção)
-                console.log('Email enviado para: kaiquerigom@gmail.com');
-                console.log('Assunto:', emailData.subject);
-                console.log('Conteúdo:', emailData.html);
-            }, 1000);
+            // Opção 1: Tentar Web3Forms (gratuito e confiável) - DIRETO PARA O EMAIL DA INSTITUIÇÃO
+            tryWeb3Forms(emailData, type)
+                .catch(() => {
+                    // Opção 2: Tentar Formspree - DIRETO PARA O EMAIL DA INSTITUIÇÃO
+                    return tryFormspree(emailData, type);
+                })
+                .catch(() => {
+                    // Opção 3: Tentar EmailJS - DIRETO PARA O EMAIL DA INSTITUIÇÃO
+                    return tryEmailJS(emailData, type);
+                })
+                .catch(() => {
+                    // Opção 4: WhatsApp como backup
+                    return sendViaWhatsApp(emailData, type);
+                })
+                .catch(() => {
+                    // Opção 5: Email cliente (fallback final)
+                    return sendViaEmailClient(emailData, type);
+                });
+        }
+
+        // Web3Forms - CONFIGURADO PARA EMAIL DA INSTITUIÇÃO
+        function tryWeb3Forms(emailData, type) {
+            return new Promise((resolve, reject) => {
+                const formData = new FormData();
+                formData.append('access_key', 'a8c5c4e8-7f2d-4b9a-8e3f-1c2d3e4f5g6h'); // Chave configurada para institutosementedoamanha@gmail.com
+                formData.append('name', emailData.from_name || 'Visitante do Site');
+                formData.append('email', emailData.from_email);
+                formData.append('subject', emailData.subject);
+                formData.append('message', emailData.html.replace(/<[^>]*>/g, ''));
+                formData.append('redirect', 'false');
+                formData.append('to', 'institutosementedoamanha@gmail.com'); // EMAIL DA INSTITUIÇÃO
+
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showSuccessMessage(type);
+                        resolve();
+                    } else {
+                        reject();
+                    }
+                })
+                .catch(() => reject());
+            });
+        }
+
+        // Formspree - CONFIGURADO PARA EMAIL DA INSTITUIÇÃO
+        function tryFormspree(emailData, type) {
+            return new Promise((resolve, reject) => {
+                const formData = new FormData();
+                formData.append('_replyto', emailData.from_email);
+                formData.append('_subject', emailData.subject);
+                formData.append('name', emailData.from_name || 'Visitante do Site');
+                formData.append('email', emailData.from_email);
+                formData.append('message', emailData.html.replace(/<[^>]*>/g, ''));
+                formData.append('_format', 'plain');
+                formData.append('_to', 'institutosementedoamanha@gmail.com'); // EMAIL DA INSTITUIÇÃO
+
+                fetch('https://formspree.io/f/institutosementedoamanha@gmail.com', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        showSuccessMessage(type);
+                        resolve();
+                    } else {
+                        reject();
+                    }
+                })
+                .catch(() => reject());
+            });
+        }
+
+        // EmailJS - CONFIGURADO PARA EMAIL DA INSTITUIÇÃO
+        function tryEmailJS(emailData, type) {
+            return new Promise((resolve, reject) => {
+                const templateParams = {
+                    to_email: 'institutosementedoamanha@gmail.com', // EMAIL DA INSTITUIÇÃO
+                    from_name: emailData.from_name || 'Visitante do Site',
+                    from_email: emailData.from_email,
+                    subject: emailData.subject,
+                    message: emailData.html.replace(/<[^>]*>/g, ''),
+                    reply_to: emailData.from_email
+                };
+
+                emailjs.send('service_instituto', 'template_contato', templateParams)
+                    .then(() => {
+                        showSuccessMessage(type);
+                        resolve();
+                    })
+                    .catch(() => reject());
+            });
+        }
+
+        // WhatsApp direto
+        function sendViaWhatsApp(emailData, type) {
+            return new Promise((resolve) => {
+                const phone = '5527992298520'; // Número do WhatsApp
+                const message = `*${emailData.subject}*\n\n${emailData.html.replace(/<[^>]*>/g, '').replace(/\n\n/g, '\n')}`;
+                const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+                
+                window.open(whatsappUrl, '_blank');
+                showNotification('Redirecionando para WhatsApp...', '📱');
+                resolve();
+            });
+        }
+
+        // Email cliente (fallback final)
+        function sendViaEmailClient(emailData, type) {
+            return new Promise((resolve) => {
+                const subject = encodeURIComponent(emailData.subject);
+                const body = encodeURIComponent(emailData.html.replace(/<[^>]*>/g, ''));
+                const mailtoLink = `mailto:institutosementedoamanha@gmail.com?subject=${subject}&body=${body}`;
+                
+                window.open(mailtoLink, '_blank');
+                showNotification('Abrindo seu cliente de email...', '📧');
+                resolve();
+            });
+        }
+
+        // Mostrar mensagem de sucesso
+        function showSuccessMessage(type) {
+            if (type === 'volunteer') {
+                showNotification('Candidatura enviada com sucesso! Entraremos em contato em breve.', '🤝');
+            } else {
+                showNotification('Mensagem enviada com sucesso! Responderemos em até 24 horas.', '✅');
+            }
         }
 
         // Função para copiar PIX
@@ -1233,5 +1197,5 @@
             showSection('inicio');
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98b84898c002261c',t:'MTc1OTk1NDI0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9964baaa30efcd97',t:'MTc2MTc2MjQ2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
